@@ -13,4 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductoRespuesta {
     private List<ProductoDTO> contenido;
+    private Integer numPagina;
+    private Integer tamPagina;
+    private Long totalElementos;
+    private Integer totalPaginas;
+    private boolean esUltimaPagina;
 }

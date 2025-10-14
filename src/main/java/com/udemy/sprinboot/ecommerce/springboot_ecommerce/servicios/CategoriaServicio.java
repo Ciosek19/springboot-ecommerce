@@ -8,7 +8,6 @@ import com.udemy.sprinboot.ecommerce.springboot_ecommerce.modelos.Respuesta.Cate
 import com.udemy.sprinboot.ecommerce.springboot_ecommerce.repositorios.interfaces.ICategoriaRepositorio;
 import com.udemy.sprinboot.ecommerce.springboot_ecommerce.servicios.Interfaces.ICategoriaServicio;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,16 +30,17 @@ public class CategoriaServicio implements ICategoriaServicio {
     }
 
     @Override
-    public CategoriaRespuesta obtenerTodasCategorias(Integer numPagina, Integer tamPagina, String ordenarPor, String ordenarEn) {
-        Sort ordenarPorYenOrden = ordenarEn.equalsIgnoreCase("asc")
+    public CategoriaRespuesta obtenerTodasCategorias(Integer paginaNumero, Integer paginaTamano, String ordenarPor, String ordenarDireccion) {
+        Sort ordenarPorYenOrden = ordenarDireccion.equalsIgnoreCase("asc")
                 ? Sort.by(ordenarPor).ascending()
                 : Sort.by(ordenarPor).descending();
 
-        Pageable detallesPagina = PageRequest.of(numPagina,tamPagina, ordenarPorYenOrden);
+        Pageable detallesPagina = PageRequest.of(paginaNumero,paginaTamano, ordenarPorYenOrden);
         Page<Categoria> categoriaPagina = categoriaRepositorio.findAll(detallesPagina);
         List<Categoria> categorias = categoriaPagina.getContent();
-        if (categorias.isEmpty())
-            throw new APIException("No existe ninguna categoria");
+        
+        if (categorias.isEmpty()) throw new APIException("No existe ninguna categoria");
+
         List<CategoriaDTO> categoriasDTOS = categorias.stream()
                 .map(categoria -> modelMapper.map(categoria, CategoriaDTO.class))
                 .collect(Collectors.toList());

@@ -25,12 +25,12 @@ public class CategoriaController {
 
     @RequestMapping(value = "/publico/categorias", method = RequestMethod.GET)
     public ResponseEntity<CategoriaRespuesta> getTodasCategorias(
-            @RequestParam(name = "numPagina", defaultValue = AppConstantes.PAGINA_NUMERO) Integer numPagina,
-            @RequestParam(name = "tamPagina", defaultValue = AppConstantes.PAGINA_TAMANO) Integer tamPagina,
-            @RequestParam(name = "ordenarPor", defaultValue = AppConstantes.PAGINA_ORDENAR_POR) String ordenarPor,
-            @RequestParam(name = "ordenarEn", defaultValue = AppConstantes.PAGINA_ORDENAR_EN) String ordenarEn
+            @RequestParam(name = "paginaNumero", defaultValue = AppConstantes.PAGINA_NUMERO) Integer paginaNumero, 
+        @RequestParam(name = "paginaTamano", defaultValue = AppConstantes.PAGINA_TAMANO) Integer paginaTamano,
+        @RequestParam(name = "ordenarPor", defaultValue = AppConstantes.ORDENAR_CATEGORIAS_POR) String ordenarPor,
+        @RequestParam(name = "ordenarDireccion", defaultValue = AppConstantes.ORDENAR_DIRECCION) String ordenarDireccion
     ) {
-        CategoriaRespuesta resultado = categoriaServicio.obtenerTodasCategorias(numPagina, tamPagina, ordenarPor, ordenarEn);
+        CategoriaRespuesta resultado = categoriaServicio.obtenerTodasCategorias(paginaNumero, paginaTamano, ordenarPor, ordenarDireccion);
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
 

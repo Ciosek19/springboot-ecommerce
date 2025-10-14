@@ -1,7 +1,7 @@
 package com.udemy.sprinboot.ecommerce.springboot_ecommerce.repositorios.interfaces;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,7 @@ import com.udemy.sprinboot.ecommerce.springboot_ecommerce.modelos.Entidades.Prod
 
 @Repository
 public interface IProductoRepositorio extends JpaRepository<Producto,Long>{
-    List<Producto> findByCategoriaOrderByPrecioAsc(Categoria categoria);
+    Page<Producto> findByCategoriaOrderByPrecioAsc(Categoria categoria, Pageable paginaDetalles);
+
+    Page<Producto> findByProductoNombreLikeIgnoreCase(String palabra, Pageable paginaDetalles);
 }

@@ -11,8 +11,10 @@ public class ProductoDTO {
     private Long productoId;
     private String productoNombre;
     private String imagen;
+    private String descripcion;
     private Integer cantidad;
     private Double precio;
     private Double descuento;
-    private Double especialPrecio;
+    private Double precioFinal;
+    
 }

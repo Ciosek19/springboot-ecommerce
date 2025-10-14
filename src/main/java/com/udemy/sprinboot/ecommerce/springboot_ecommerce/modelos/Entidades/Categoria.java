@@ -1,5 +1,7 @@
 package com.udemy.sprinboot.ecommerce.springboot_ecommerce.modelos.Entidades;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,5 +24,7 @@ public class Categoria {
     @Column(name = "nombre")
     private String categoriaNombre;
 
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<Producto> productos;
 
 }
